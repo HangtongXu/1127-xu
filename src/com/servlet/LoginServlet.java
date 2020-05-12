@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
         if(userService.userLigon(user1)){
             req.setAttribute("username",username);
             req.setAttribute("password",password);
-
             req.getRequestDispatcher("/success.jsp").forward(req,resp);
         }
         else {
