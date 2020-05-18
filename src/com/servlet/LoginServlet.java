@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet {
         String username=(String)req.getParameter("username");
         String password=(String)req.getParameter("password");
         String check=req.getParameter("check");
-        System.out.println(check);
         if(check!=null) {
             Cookie cookie1=new Cookie("username",username);
             Cookie cookie2=new Cookie("password",username);

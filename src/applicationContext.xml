@@ -7,11 +7,11 @@
 
     <context:component-scan base-package="com"></context:component-scan>
 
-    <bean id="userDao" class="com.dao.impl.UserDaoImpl" scope="singleton"></bean>
+    <bean id="userDao" class="com.dao.impl.UserDaoImpl" ></bean>
     <bean id="user" class="com.domain.User" scope="singleton">
-        <constructor-arg name="password" value="123456"></constructor-arg>
-        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
-        <constructor-arg name="username" value="123456"></constructor-arg>
+        <!--<constructor-arg name="password" value="123456"></constructor-arg>-->
+        <!--<constructor-arg name="userDao" ref="userDao"></constructor-arg>-->
+        <!--<constructor-arg name="username" value="123456"></constructor-arg>-->
         <!--<property name="password" value="1111"></property>-->
         <!--<property name="username" value="1111"></property>-->
     </bean>

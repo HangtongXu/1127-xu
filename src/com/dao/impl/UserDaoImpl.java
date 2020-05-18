@@ -2,59 +2,61 @@ package com.dao.impl;
 
 import com.dao.UserDao;
 import com.domain.User;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Resource;
+import java.io.InputStream;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-    private Map<String,User> userMap=new HashMap<String, User>();
+    private SqlSession sqlSession=null;
+    private SqlSessionFactory sqlSessionFactory=null;
 
+    public UserDaoImpl(){
+        InputStream im= Thread.currentThread().getContextClassLoader().getResourceAsStream("config.xml");
+        sqlSessionFactory=new SqlSessionFactoryBuilder().build(im);
+    }
     @Override
     public User getUser(String username) {
-        return userMap.get(username);
+        sqlSession=sqlSessionFactory.openSession();
+        User user=sqlSession.selectOne("getUser",username);
+        sqlSession.close();
+        return user;
     }
 
-    @Override
-    public boolean checkUser(String username) {
-        if(this.userMap.containsKey(username))
-            return true;
-        else
-            return false;
-    }
-
-    @Override
-    public boolean userCreate(User user) {
-        userMap.put(user.getUsername(),user);
-        return true;
-    }
 
     @Override
     public boolean login(User user) {
-        String username=user.getUsername();
-        String password=user.getPassword();
-        if(this.checkUser(username)&&password.equals(this.getUser(username).getPassword()))
-        return true;
-        else {
-            try {
-                new RuntimeException().printStackTrace();
-            }
-            catch (Exception e){
-                System.out.println("出错了");
-            }
-            return false;
+        boolean result=false;
+        sqlSession=sqlSessionFactory.openSession();
+        if(getUser(user.getUsername())!=null){
+            result=user.getPassword().equals(getUser(user.getUsername()).getPassword());
         }
+        sqlSession.close();
+        return result;
     }
 
     @Override
     public boolean userRegister(User user) {
-        if(null!=user&&!userMap.containsKey(user.getUsername()))
-        {
-            userMap.put(user.getUsername(),user);
-            System.out.println(userMap);
+        sqlSession=sqlSessionFactory.openSession();
+        int num=sqlSession.insert("userRegister",user);
+        sqlSession.commit();
+        sqlSession.close();
+        if(num>0)
             return true;
-        }
         else
             return false;
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        sqlSession=sqlSessionFactory.openSession();
+        List<User> users=sqlSession.selectList("getAllUser");
+        sqlSession.commit();
+        sqlSession.close();
+        return users;
     }
 }

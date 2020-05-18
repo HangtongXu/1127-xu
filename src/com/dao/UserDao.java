@@ -8,9 +8,7 @@ import java.util.Map;
 public interface UserDao {
 
     public User getUser(String username);
-
-    public boolean checkUser(String username);
-    public boolean userCreate(User user);
     public boolean login(User user);
     public boolean userRegister(User user);
+    public List<User> getAllUser();
 }

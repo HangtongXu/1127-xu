@@ -1,5 +1,6 @@
 package com.domain;
 
+
 import com.dao.UserDao;
 
 public class User {
@@ -10,7 +11,6 @@ public class User {
     public User(String username, String password, UserDao userDao) {
         this.username = username;
         this.password = password;
-        userDao.userCreate(this);
     }
 
     public User() {
