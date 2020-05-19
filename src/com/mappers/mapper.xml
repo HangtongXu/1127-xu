@@ -4,15 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.mappers.TestMy">
-<select id="getAllUser" resultType="user">
+<mapper namespace="com.dao">
+    <select id="getAllUser" resultType="user">
     select * from user;
-</select>
-<select id="getUser" parameterType="String" resultType="user">
+    </select>
+    <select id="getUser" parameterType="String" resultType="user">
     select * from user where username=#{0};
-</select>
-
+    </select>
     <insert id="userRegister" parameterType="user">
         insert into user(username,password) values(#{username},#{password});
     </insert>
+    <select id="getAllVideos" resultType="Video">
+        select * from video;
+    </select>
+    <select id="serchVideos" resultType="Video" parameterType="String">
+        select * from video where v_name like #{0};
+    </select>
 </mapper>
+
