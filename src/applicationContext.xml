@@ -16,5 +16,6 @@
         <!--<property name="password" value="1111"></property>-->
         <!--<property name="username" value="1111"></property>-->
     </bean>
+    <bean id="video" class="com.domain.Video"></bean>
     <bean id="userService" class="com.service.impl.UserServiceImpl" ></bean>
 </beans>

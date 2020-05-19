@@ -20,5 +20,11 @@
     <select id="serchVideos" resultType="Video" parameterType="String">
         select * from video where v_name like #{0};
     </select>
+    <insert id="newVideo" parameterType="video">
+        insert into video(v_name,v_url) values(#{v_name},#{v_url});
+    </insert>
+    <delete id="deleteVideo" parameterType="int">
+        delete from video where v_id=#{0};
+    </delete>
 </mapper>
 

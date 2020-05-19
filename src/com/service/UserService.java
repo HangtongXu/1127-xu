@@ -11,4 +11,6 @@ public interface UserService {
     public boolean userRegister(User user);
     public List<Video> getVideos();
     public List<Video> serchVideos(String message);
+    public boolean newVideo(Video video);
+    public boolean deleteVideo(Integer id);
 }

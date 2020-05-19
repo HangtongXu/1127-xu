@@ -35,6 +35,18 @@ public class UserServiceImpl implements UserService {
         return videoDao.serchVideos(message);
     }
 
+    @Override
+    public boolean newVideo(Video video) {
+        videoDao.newVideo(video);
+        return true;
+    }
+
+    @Override
+    public boolean deleteVideo(Integer id) {
+        videoDao.deleteVideo(id);
+        return true;
+    }
+
     public UserServiceImpl() {
 
     }

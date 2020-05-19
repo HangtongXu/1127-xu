@@ -103,10 +103,35 @@
         border-style: solid;
         border-color: #a9c6c9;
     }
-</style>
-<style type="text/css">
 
-</style></p>
+</style>
+<script type="text/javascript">
+    function openForm() {
+        document.getElementById("button").hidden=true;
+        document.getElementById("hidform").hidden=false;
+    }
+    function closeForm() {
+        document.getElementById("button").hidden=false;
+        document.getElementById("hidform").hidden=true;
+    }
+    function deleteVideo(id) {
+
+        if(confirm("确认删除本条资源吗？")) {
+            window.location.href="/videoModify?v_id="+id;
+            window.event=false;
+        }
+        return false;
+    }
+    function newVideo(form) {
+        var formdata=new FormData(form);
+        var name=formdata.get("v_name");
+        var url=formdata.get("v_url");
+        if(name.isEmpty()){alert("影视名不能为空")}
+        else if(url.length>50){alert("网页链接过长")}
+        else {
+            form.submit(); }
+    }
+</script>
 <body>
 <!-- CSS goes in the document HEAD or added to your external stylesheet -->
 <center>
@@ -117,19 +142,35 @@
             <input type="text" placeholder="请输入要搜索的影视名称" name="video_message">
             <button type="submit"></button>
         </form>
+
     </div>
 
 <table class="hovertable">
     <tr>
-        <th>影视名称</th><th>影视上载时间</th><th>链接网址</th>
+        <th>影视名称</th><th>影视上载时间</th><th>链接网址</th><th>删除操作</th>
     </tr>
     <c:forEach items="${videos}" var="video" varStatus="count">
     <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
-        <td>${video.v_name}</td><td>${video.v_date}</td><td><a href=" ${video.v_url}">${count.index+1}</a></td>
+        <td>${video.v_name}</td>
+        <td>${video.v_date}</td>
+        <td><a href=" ${video.v_url}">开始观看</a></td>
+        <td><a href onclick="return deleteVideo(${video.v_id})">删除</a></td>
     </tr>
     </c:forEach>
 </table>
+            <button  id="button" onclick="openForm()"  style="width:100px; height: 50px"> 上传资源</button>
+
+        <form action="/videoModify" hidden="true" id="hidform" onsubmit="newVideo(this)">
+            <input type="text" placeholder="请输入影视名" name="v_name" id="v_name">
+            <input type="text" placeholder="请输入连接网址" name="v_url" id="v_url">
+            <input type="submit"  value="上传">
+            <input type="button"  onclick="closeForm()" value="取消">
+        </form>
+        <form action="/videoModify" hidden="true" id="delete">
+            <input name="v_id" type="hidden">
+        </form>
     </div>
+
 </center>
 </body>
 </html>

@@ -52,6 +52,14 @@
         <servlet-name>video</servlet-name>
         <url-pattern>/video</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>videoModify</servlet-name>
+        <servlet-class>com.servlet.VideoModifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>videoModify</servlet-name>
+        <url-pattern>/videoModify</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

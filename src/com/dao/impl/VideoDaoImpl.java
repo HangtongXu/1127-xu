@@ -36,4 +36,21 @@ public class VideoDaoImpl implements VideoDao {
         List<Video> videos=sqlSession.selectList("serchVideos",messge);
         return videos;
     }
+
+    @Override
+    public void newVideo(Video video) {
+
+        sqlSession=sqlSessionFactory.openSession();
+        int count=sqlSession.insert("newVideo",video);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Override
+    public void deleteVideo(Integer id) {
+        sqlSession=sqlSessionFactory.openSession();
+        int count=sqlSession.delete("deleteVideo",id);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }
