@@ -15,16 +15,6 @@ public class TestDemo {
 //    @Autowired
 //    UserService userService;
     public static void main(String[] args) {
-        ApplicationContext ac=
-                new ClassPathXmlApplicationContext("applicationContext.xml");
-        User user=ac.getBean("user",User.class);
-        UserDao userDao=ac.getBean("userDao",UserDao.class);
-        UserService userService=ac.getBean("userService",UserService.class);
 
-        System.out.println(userService);
-        User user1=new User();
-        user1.setUsername("111");
-        user1.setPassword("111");
-        System.out.println(userService.userLigon(user1));
     }
 }
