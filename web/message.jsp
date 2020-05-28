@@ -151,7 +151,7 @@
     </tr>
     <c:forEach items="${videos}" var="video" varStatus="count">
     <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
-        <td>${video.v_name}</td>
+        <td>${video.v_name }</td>
         <td>${video.v_date}</td>
         <td><a href=" ${video.v_url}">开始观看</a></td>
         <td><a href onclick="return deleteVideo(${video.v_id})">删除</a></td>
